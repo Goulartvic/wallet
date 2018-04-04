@@ -5,6 +5,7 @@ import interfaces.ICrud;
 import model.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 public class UserController extends Controller implements ICrud {
@@ -115,9 +116,9 @@ public class UserController extends Controller implements ICrud {
         return false;
     }
 
-    public Map<String, Double> listWallet(String login) {
+    public Collection<Double> listWallet(String login) {
         if (login != null) {
-            return searchUser(login).getWallet();
+            return searchUser(login).getWalletList();
         }
         return null;
     }

@@ -13,7 +13,7 @@ import model.Wallet;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FXMLWalletController implements Initializable {
+public class WalletControllerFxml implements Initializable {
 
 
     @FXML

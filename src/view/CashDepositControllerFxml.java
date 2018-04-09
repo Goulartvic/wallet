@@ -1,32 +1,20 @@
 package view;
 
 import control.CoinController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Coin;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class FXMLExchangeCoinController implements Initializable {
+public class CashDepositControllerFxml {
 
     @FXML
     private MenuBar menuBar;
 
     @FXML
-    private TextField buyQuantText;
-
-    @FXML
-    private Label buyValueLabel;
+    private TextField depositQuantText;
 
     @FXML
     private MenuItem menuSell;
@@ -38,23 +26,17 @@ public class FXMLExchangeCoinController implements Initializable {
     private MenuItem menuDeposit;
 
     @FXML
-    private Button buyBtn;
-
-    @FXML
     private MenuItem menuWallet;
 
     @FXML
-    private Button buyBtnCancel;
+    private Button depositBtnCancel;
 
     @FXML
-    private ComboBox<Coin> buyCbBoxCoin;
-
-    @FXML
-    private ComboBox<Coin> buyCbBoxCoinOut;
+    private Button depositBtn;
 
     @FXML
     public void goQuitAction() {
-        ExchangeCoin.getStage().close();
+        CashDeposit.getStage().close();
     }
 
     @FXML
@@ -102,8 +84,7 @@ public class FXMLExchangeCoinController implements Initializable {
     }
 
     @FXML
-    public void buyBtnAction() {
-        CoinController.getCoinController().exchangeMoney(Double.parseDouble(buyQuantText.getText()), buyCbBoxCoinOut.getValue(), buyCbBoxCoin.getValue());
+    void depositBtnCancelAction() {
         Wallet wallet = new Wallet();
         goQuitAction();
         try {
@@ -111,10 +92,12 @@ public class FXMLExchangeCoinController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @FXML
-    public void buyBtnCancelAction() {
+    void depositBtnAction() {
+        CoinController.getCoinController().depositMoney(Double.parseDouble(depositQuantText.getText()));
         Wallet wallet = new Wallet();
         goQuitAction();
         try {
@@ -122,17 +105,6 @@ public class FXMLExchangeCoinController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    public ObservableList<Coin> loadCheckBox() {
-        ObservableList<Coin> coins = FXCollections.observableArrayList(CoinController.getCoinController().read());
-        return coins;
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        buyCbBoxCoin.setItems(loadCheckBox());
-        buyCbBoxCoinOut.setItems(loadCheckBox());
-    }
 }

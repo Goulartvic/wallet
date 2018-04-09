@@ -2,19 +2,24 @@ package view;
 
 import control.CoinController;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class FXMLCashDepositController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class CashWithdrawalControllerFxml implements Initializable {
 
     @FXML
     private MenuBar menuBar;
 
     @FXML
-    private TextField depositQuantText;
+    private Button cashBtnWithdrawal;
 
     @FXML
     private MenuItem menuSell;
@@ -23,20 +28,23 @@ public class FXMLCashDepositController {
     private MenuItem menuQuotation;
 
     @FXML
+    private TextField cashQuantText;
+
+    @FXML
     private MenuItem menuDeposit;
+
+    @FXML
+    private Button cashBtnCancel;
 
     @FXML
     private MenuItem menuWallet;
 
     @FXML
-    private Button depositBtnCancel;
-
-    @FXML
-    private Button depositBtn;
+    private Label cashValueLabel;
 
     @FXML
     public void goQuitAction() {
-        CashDeposit.getStage().close();
+        CashWithdrawal.getStage().close();
     }
 
     @FXML
@@ -72,6 +80,7 @@ public class FXMLCashDepositController {
         }
     }
 
+
     @FXML
     public void goBuyAction() {
         ExchangeCoin exchangeCoin = new ExchangeCoin();
@@ -83,8 +92,23 @@ public class FXMLCashDepositController {
         }
     }
 
+
     @FXML
-    void depositBtnCancelAction() {
+    void cashBtnCancelAction() {
+        Wallet wallet = new Wallet();
+        goQuitAction();
+        try {
+            wallet.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    public void cashBtnWithdrawalAction() {
+        System.out.println(cashQuantText.getText());
+        CoinController.getCoinController().withdrawMoney(Double.parseDouble(cashQuantText.getText()));
         Wallet wallet = new Wallet();
         goQuitAction();
         try {
@@ -95,16 +119,7 @@ public class FXMLCashDepositController {
 
     }
 
-    @FXML
-    void depositBtnAction() {
-        CoinController.getCoinController().depositMoney(Double.parseDouble(depositQuantText.getText()));
-        Wallet wallet = new Wallet();
-        goQuitAction();
-        try {
-            wallet.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
-
 }

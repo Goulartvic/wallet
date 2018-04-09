@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FXMLLoginController implements Initializable {
+public class LoginControllerFxml implements Initializable {
 
     private static Stage stage;
 
@@ -33,7 +33,7 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private MenuItem menuQuit;
 
-    public FXMLLoginController() {
+    public LoginControllerFxml() {
     }
 
     @Override

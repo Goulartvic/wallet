@@ -13,7 +13,7 @@ import model.User;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FXMLRegisterUserController {
+public class RegisterUserControllerFxml {
 
 
     @FXML
@@ -31,7 +31,7 @@ public class FXMLRegisterUserController {
     @FXML
     private MenuItem menuQuit;
 
-    public FXMLRegisterUserController() {
+    public RegisterUserControllerFxml() {
     }
 
     @FXML

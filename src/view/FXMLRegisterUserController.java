@@ -26,16 +26,10 @@ public class FXMLRegisterUserController {
     private PasswordField registerUserPassword;
 
     @FXML
-    private TextField registerUserCPF;
-
-    @FXML
     private TextField registerUserLoginName;
 
     @FXML
     private MenuItem menuQuit;
-
-    @FXML
-    private TextField registerUserName;
 
     public FXMLRegisterUserController() {
     }
@@ -59,8 +53,7 @@ public class FXMLRegisterUserController {
     @FXML
     public void registerUserBtnSaveAction() {
         UserController userCtrl = UserController.getUserController();
-        User user = new User(registerUserLoginName.getText(), registerUserPassword.getText(),
-                registerUserName.getText(), registerUserCPF.getText(), UserController.getUserController().createWallet());
+        User user = new User(registerUserLoginName.getText(), registerUserPassword.getText(), UserController.getUserController().createWallet());
         userCtrl.create(user);
         Login login = new Login();
         goQuitAction();

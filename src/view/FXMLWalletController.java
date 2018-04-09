@@ -1,28 +1,16 @@
 package view;
 
 import control.UserController;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import model.Coin;
-import model.User;
-import model.WalletCoin;
+import model.Wallet;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class FXMLWalletController implements Initializable {
@@ -35,13 +23,13 @@ public class FXMLWalletController implements Initializable {
     private MenuItem menuWallet;
 
     @FXML
-    private TableView<WalletCoin> walletTable;
+    private TableView<Wallet> walletTable;
 
     @FXML
-    private TableColumn<WalletCoin, String> coinColumn;
+    private TableColumn<Wallet, String> coinColumn;
 
     @FXML
-    private TableColumn<WalletCoin, Double> valueColumn;
+    private TableColumn<Wallet, Double> valueColumn;
 
     @FXML
     private Button walletBtnSell;
@@ -66,12 +54,12 @@ public class FXMLWalletController implements Initializable {
 
     @FXML
     public void goQuitAction() {
-        Wallet.getStage().close();
+        view.Wallet.getStage().close();
     }
 
     @FXML
     public void goWalletAction() {
-        Wallet wallet = new Wallet();
+        view.Wallet wallet = new view.Wallet();
         goQuitAction();
         try {
             wallet.start(new Stage());
@@ -104,25 +92,13 @@ public class FXMLWalletController implements Initializable {
 
     @FXML
     public void goBuyAction() {
-        BuyCoin buyCoin = new BuyCoin();
+        ExchangeCoin exchangeCoin = new ExchangeCoin();
         goQuitAction();
         try {
-            buyCoin.start(new Stage());
+            exchangeCoin.start(new Stage());
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    public void goSellAction() {
-        SellCoin sellCoin = new SellCoin();
-        goQuitAction();
-        try {
-            sellCoin.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     @FXML
@@ -148,22 +124,11 @@ public class FXMLWalletController implements Initializable {
     }
 
     @FXML
-    void walletBtnSellAction(ActionEvent event) {
-        SellCoin sellCoin = new SellCoin();
-        goQuitAction();
-        try {
-            sellCoin.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     void walletBtnBuyAction(ActionEvent event) {
-        BuyCoin buyCoin = new BuyCoin();
+        ExchangeCoin exchangeCoin = new ExchangeCoin();
         goQuitAction();
         try {
-            buyCoin.start(new Stage());
+            exchangeCoin.start(new Stage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,8 +136,8 @@ public class FXMLWalletController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        coinColumn.setCellValueFactory(new PropertyValueFactory<>("nameCoin"));
-        valueColumn.setCellValueFactory(new PropertyValueFactory<>("qtd"));
+        coinColumn.setCellValueFactory(new PropertyValueFactory<>("coinName"));
+        valueColumn.setCellValueFactory(new PropertyValueFactory<>("coinValue"));
         walletTable.setItems(FXCollections.observableList(UserController.getSessionUser().getWallet()));
     }
 }

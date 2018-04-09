@@ -1,6 +1,6 @@
 package view;
 
-import Job.UpdateValue;
+import update.UpdateThread;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +17,7 @@ public class Login extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         ScheduledThreadPoolExecutor stpe = new ScheduledThreadPoolExecutor(2);
-        stpe.scheduleAtFixedRate(new UpdateValue(), 0, 5, TimeUnit.MINUTES);
+        stpe.scheduleAtFixedRate(new UpdateThread(), 0, 30, TimeUnit.SECONDS);
         Parent login = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene scene = new Scene(login);
         stage.setScene(scene);

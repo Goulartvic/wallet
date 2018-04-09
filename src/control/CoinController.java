@@ -1,7 +1,7 @@
 package control;
 
 import dao.CoinDao;
-import interfaces.ICrud;
+import dao.DaoInterface;
 import model.Coin;
 
 import java.time.Instant;
@@ -10,21 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoinController extends Controller implements ICrud {
+public class CoinController implements DaoInterface {
 
     private static CoinController coinController;
-    private static double iof = 1.01;
-    private static double corretagem = 0.5;
-
-
-    public CoinController() {
-        super();
-    }
-
-    @Override
-    public void initiate() {
-
-    }
+    private static double tax = 0.99;
 
     @Override
     public void delete(String name) {
@@ -64,34 +53,8 @@ public class CoinController extends Controller implements ICrud {
         return coinController;
     }
 
-    public static double getIof() {
-        return iof;
-    }
-
-    public static void setIof(double iof) {
-        CoinController.iof = iof;
-    }
-
-    public static double getCorretagem() {
-        return corretagem;
-    }
-
-    public static void setCorretagem(double corretagem) {
-        CoinController.corretagem = corretagem;
-    }
-
     public static void setCoinController(CoinController coinController) {
         CoinController.coinController = coinController;
-    }
-
-    public void receiveData(String name, double price) {
-        Coin coin = new Coin(name, price);
-        create(coin);
-    }
-
-    public void updateData(String name, double price) {
-        Coin coin = new Coin(name, price);
-        update(coin);
     }
 
     @Override
@@ -100,16 +63,6 @@ public class CoinController extends Controller implements ICrud {
             Coin cn = (Coin) coin;
             System.out.println(cn.getName() + " " + cn.getPrice());
             CoinDao.getCoinDao().put(cn);
-//            if (read().isEmpty()) {
-//                cn.setName("Real");
-//            } else {
-//                String lastId = read().get(read().size() - 1).getName();
-//                int lastIntId = Integer.parseInt(lastId);
-//                int newIntId = lastIntId + 1;
-//                String newId = Integer.toString(newIntId);
-//                cn.setExtId(newId);
-//                CoinDao.getCoinDao().put(cn);
-//            }
         }
     }
 
@@ -125,22 +78,22 @@ public class CoinController extends Controller implements ICrud {
         return wallet;
     }
 
-    public void depositReal(double value) {
+    public void depositMoney(double value) {
         System.out.println(UserController.getUserController().getSessionUser());
-        double total = UserController.getUserController().getCoinWallet("Real").getQtd() + value;
-        UserController.getUserController().getCoinWallet("Real").setQtd(total);
+        double total = UserController.getUserController().getCoinWallet("Real").getCoinValue() + value;
+        UserController.getUserController().getCoinWallet("Real").setCoinValue(total);
         Instant timeNow = Instant.now();
-        String history = UserController.getUserController().getSessionUser().getName() + " - Depósito: R$" + value + " - Data: " + timeNow.toString();
+        String history = UserController.getUserController().getSessionUser().getLogin() + " - Depósito: R$" + value + " - Data: " + timeNow.toString();
         UserController.getUserController().getSessionUser().getHistory().add(history);
         UserController.getUserController().updatePersist();
     }
 
-    public void exchange(double value, Coin coinOut, Coin coinIn) {
-        if (value > UserController.getUserController().getCoinWallet(coinOut.getName()).getQtd()) {
+    public void exchangeMoney(double value, Coin coinOut, Coin coinIn) {
+        if (value > UserController.getUserController().getCoinWallet(coinOut.getName()).getCoinValue()) {
             System.out.println("Falta dinheiro " + coinOut.getName() + " " + coinIn.getName());
         } else {
-            double walletCoinOut = UserController.getUserController().getCoinWallet(coinOut.getName()).getQtd() - value;
-            double walletCoinIn = UserController.getUserController().getCoinWallet(coinIn.getName()).getQtd();
+            double walletCoinOut = UserController.getUserController().getCoinWallet(coinOut.getName()).getCoinValue() - value;
+            double walletCoinIn = UserController.getUserController().getCoinWallet(coinIn.getName()).getCoinValue();
             double coinOutToCoinIn;
             if (coinIn.getPrice() < coinOut.getPrice()) {
                 coinOutToCoinIn = ((value * coinOut.getPrice())/coinIn.getPrice()) + walletCoinIn;
@@ -148,47 +101,25 @@ public class CoinController extends Controller implements ICrud {
             else {
                 coinOutToCoinIn = (value / coinIn.getPrice()) + walletCoinIn;
             }
-            UserController.getUserController().getCoinWallet(coinOut.getName()).setQtd(walletCoinOut);
-            UserController.getUserController().getCoinWallet(coinIn.getName()).setQtd(coinOutToCoinIn);
+            UserController.getUserController().getCoinWallet(coinOut.getName()).setCoinValue(walletCoinOut);
+            UserController.getUserController().getCoinWallet(coinIn.getName()).setCoinValue(coinOutToCoinIn*tax);
 
             Instant timeNow = Instant.now();
-            String history = UserController.getUserController().getSessionUser().getName() + " - Venda De: " + value + " " + coinOut.getName() + " Para: " + coinOutToCoinIn + " " + coinIn.getName() + " - Data: " + timeNow.toString();
+            String history = UserController.getUserController().getSessionUser().getLogin() + " - Venda De: " + value + " " + coinOut.getName() + " Para: " + coinOutToCoinIn + " " + coinIn.getName() + " - Data: " + timeNow.toString();
             UserController.getUserController().getSessionUser().getHistory().add(history);
             UserController.getUserController().updatePersist();
         }
     }
 
-    public void withdrawReal(double value) {
-        if (value <= UserController.getUserController().getCoinWallet("Real").getQtd()) {
-            UserController.getUserController().getCoinWallet("Real").setQtd(UserController.getUserController().getCoinWallet("Real").getQtd() - value);
-//            UserController.getUserController().getSessionUser().getWallet().replace("Real", (UserController.getUserController().getSessionUser().getWallet().get("Real") - value));
+    public void withdrawMoney(double value) {
+        if (value <= UserController.getUserController().getCoinWallet("Real").getCoinValue()) {
+            UserController.getUserController().getCoinWallet("Real").setCoinValue(UserController.getUserController().getCoinWallet("Real").getCoinValue() - value);
             Instant timeNow = Instant.now();
-            String history = UserController.getUserController().getSessionUser().getName() + " - Retirada: R$" + value + " - Data: " + timeNow.toString();
+            String history = UserController.getUserController().getSessionUser().getLogin() + " - Retirada: R$" + value + " - Data: " + timeNow.toString();
             UserController.getUserController().getSessionUser().getHistory().add(history);
             UserController.getUserController().updatePersist();
         } else {
-            System.out.println("Falta dinheiro");
+            System.out.println("Falta dinheiro!");
         }
     }
-
-    public Coin searchCoin(String name) {
-        return CoinDao.getCoinDao().get(name);
-    }
-
-    public boolean verifyCoinExistance(String name) {
-        if (CoinDao.getCoinDao().get(name) != null) {
-            return true;
-        }
-        return false;
-    }
-
-    // Continue from here warning!
-
-//    public double verifyCoinQuantity(String name) {
-//        if (UserController.getSessionUser() != null && name != null || name != "" || name != "Real") {
-//            return (UserController.getSessionUser().getWallet().get(name) / CoinController.getCoinController().searchCoin("Real").getPrice());
-//        }
-//        return 0.0;
-//    }
-
 }

@@ -18,6 +18,7 @@ public class CashWithdrawal extends Application {
         stage.setScene(scene);
         stage.show();
         setStage(stage);
+        stage.setMaximized(true);
     }
 
     public static Stage getStage() {

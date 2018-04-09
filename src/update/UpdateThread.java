@@ -1,11 +1,11 @@
-package Job;
+package update;
 
 import control.CoinController;
 import model.Coin;
 
 import java.util.Random;
 
-public class UpdateValue implements Runnable {
+public class UpdateThread implements Runnable {
 
     @Override
     public void run() {
@@ -17,7 +17,6 @@ public class UpdateValue implements Runnable {
         CoinController.getCoinController().update(doge);
         CoinController.getCoinController().update(marreta);
         CoinController.getCoinController().update(recayd);
-        System.out.println("Mudança de valor");
     }
 
     public double getDoubleValue() {

@@ -3,6 +3,7 @@ package view;
 import control.CoinController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -90,48 +91,37 @@ public class FXMLQuotationController implements Initializable {
 
     @FXML
     public void goBuyAction() {
-        BuyCoin buyCoin = new BuyCoin();
+        ExchangeCoin exchangeCoin = new ExchangeCoin();
         goQuitAction();
         try {
-            buyCoin.start(new Stage());
+            exchangeCoin.start(new Stage());
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    public void goSellAction() {
-        SellCoin sellCoin = new SellCoin();
-        goQuitAction();
-        try {
-            sellCoin.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     @FXML
     public void quoteBtnBuyAction() {
-        BuyCoin buyCoin = new BuyCoin();
+        ExchangeCoin exchangeCoin = new ExchangeCoin();
         goQuitAction();
         try {
-            buyCoin.start(new Stage());
+            exchangeCoin.start(new Stage());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    public void quoteBtnSellAction() {
-        SellCoin sellCoin = new SellCoin();
+    void goWithdraw() {
+        CashWithdrawal withdrawal = new CashWithdrawal();
         goQuitAction();
         try {
-            sellCoin.start(new Stage());
+            withdrawal.start(new Stage());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public ObservableList<Coin> loadTable() {
         ObservableList<Coin> coins = FXCollections.observableArrayList(CoinController.getCoinController().read());

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLLoginController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: lightblue" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLLoginController">
     <children>
         <Pane prefHeight="400.0" prefWidth="549.0">
             <children>
@@ -21,7 +21,6 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Arquivo">
                             <items>
-                                <MenuItem fx:id="rateConfig" mnemonicParsing="false" onAction="#goRateConfigAction" text="Configurar Taxas" />
                         <MenuItem fx:id="menuQuit1" mnemonicParsing="false" onAction="#goQuitAction" text="Sair" />
                             </items>
                         </Menu>
@@ -31,7 +30,7 @@
                 <Label layoutX="189.0" layoutY="160.0" text="Senha" />
                 <TextField fx:id="LoginUserText" layoutX="238.0" layoutY="121.0" />
                 <PasswordField fx:id="LoginUserPass" layoutX="238.0" layoutY="155.0" />
-                <Button fx:id="loginBtnRegisterUser" layoutX="238.0" layoutY="210.0" mnemonicParsing="false" onAction="#loginBtnRegisterUserAction" text="Criar conta" />
+                <Button fx:id="loginBtnRegisterUser" layoutX="238.0" layoutY="210.0" mnemonicParsing="false" onAction="#loginBtnRegisterUserAction" text="Registrar" />
                 <Button fx:id="LoginBtn" layoutX="349.0" layoutY="210.0" mnemonicParsing="false" onAction="#LoginBtnAction" text="Entrar" />
             </children>
         </Pane>

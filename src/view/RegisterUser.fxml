@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLRegisterUserController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" style="-fx-background-color: lightblue" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLRegisterUserController">
     <children>
         <Pane prefHeight="406.0" prefWidth="600.0">
             <children>
@@ -26,12 +26,8 @@
                         </Menu>
                     </menus>
                 </MenuBar>
-                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="165.0" layoutY="96.0" text="Nome" />
-                <Label alignment="CENTER_RIGHT" layoutX="165.0" layoutY="129.0" prefHeight="15.0" prefWidth="38.0" text="CPF" />
                 <Label alignment="CENTER_RIGHT" layoutX="95.0" layoutY="162.0" text="Usuario de Login" />
                 <Label alignment="CENTER_RIGHT" layoutX="164.0" layoutY="199.0" text="Senha" />
-                <TextField fx:id="registerUserName" layoutX="215.0" layoutY="91.0" />
-                <TextField fx:id="registerUserCPF" layoutX="215.0" layoutY="124.0" />
                 <TextField fx:id="registerUserLoginName" layoutX="215.0" layoutY="157.0" />
                 <PasswordField fx:id="registerUserPassword" layoutX="215.0" layoutY="194.0" />
                 <Button fx:id="registerUserBtnCancel" layoutX="215.0" layoutY="257.0" mnemonicParsing="false" onAction="#registerUserBtnCancelAction" text="Cancelar" />

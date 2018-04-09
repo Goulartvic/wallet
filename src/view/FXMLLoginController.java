@@ -47,17 +47,6 @@ public class FXMLLoginController implements Initializable {
     }
 
     @FXML
-    public void goRateConfigAction() {
-        RatesSettings ratesSettings = new RatesSettings();
-        goQuitAction();
-        try {
-            ratesSettings.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     public void loginBtnRegisterUserAction() {
         RegisterUser registerUser = new RegisterUser();
         goQuitAction();

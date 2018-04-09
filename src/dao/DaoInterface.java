@@ -1,8 +1,8 @@
-package interfaces;
+package dao;
 
 import java.util.ArrayList;
 
-public interface ICrud<E> {
+public interface DaoInterface<E> {
     void create(E e);
 
     void update(E e);

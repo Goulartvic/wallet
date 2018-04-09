@@ -6,18 +6,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class RatesSettings extends Application {
+public class ExchangeCoin extends Application {
 
     private static Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent sellCoin = FXMLLoader.load(getClass().getResource("RatesSettings.fxml"));
-        Scene scene = new Scene(sellCoin);
+        Parent buyCoin = FXMLLoader.load(getClass().getResource("ExchangeCoin.fxml"));
+        Scene scene = new Scene(buyCoin);
         stage.setScene(scene);
         stage.show();
         setStage(stage);
+        stage.setMaximized(true);
     }
 
     public static Stage getStage() {
@@ -25,7 +26,7 @@ public class RatesSettings extends Application {
     }
 
     public static void setStage(Stage stage) {
-        RatesSettings.stage = stage;
+        ExchangeCoin.stage = stage;
     }
 
 

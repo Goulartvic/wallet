@@ -33,16 +33,16 @@
         </MenuBar>
         <Pane prefHeight="415.0" prefWidth="600.0">
             <children>
-                <Label text="COTAÇÃO" layoutX="800" layoutY="100" style="-fx-font-weight: bold"/>
-                <TableView fx:id="tableQuotation" layoutX="584.00" layoutY="180" prefHeight="273.0" prefWidth="511.0">
+                <Label text="COTAÇÃO" layoutX="894" layoutY="100" style="-fx-font: 40px tahoma"/>
+                <TableView fx:id="tableQuotation" layoutX="584.00" layoutY="180" prefHeight="300.0" prefWidth="800.0">
                     <columns>
-                        <TableColumn fx:id="columnCoin" prefWidth="255.0" text="Moeda" />
-                        <TableColumn fx:id="columnPrice" prefWidth="255.0" text="Valor em R$" />
+                        <TableColumn fx:id="columnCoin" prefWidth="400.0" text="Moeda" />
+                        <TableColumn fx:id="columnPrice" prefWidth="400.0" text="Valor em R$" />
                     </columns>
                 </TableView>
-                <Button fx:id="quoteBtnBuy" layoutX="980" layoutY="475.00" mnemonicParsing="false" onAction="#quoteBtnBuyAction" text="Troca/Compra" />
-                <Button fx:id="walletDepositBtn" layoutX="700" layoutY="475.00" mnemonicParsing="false" onAction="#goDepositAction" text="Depositar" />
-                <Button fx:id="walletCashWithBtn" layoutX="580" layoutY="475.00" mnemonicParsing="false" onAction="#goWithdraw" text="Sacar" />
+                <Button fx:id="quoteBtnBuy" layoutX="1275" layoutY="525.00" mnemonicParsing="false" onAction="#quoteBtnBuyAction" text="Troca/Compra" />
+                <Button fx:id="walletDepositBtn" layoutX="700" layoutY="525.00" mnemonicParsing="false" onAction="#goDepositAction" text="Depositar" />
+                <Button fx:id="walletCashWithBtn" layoutX="580" layoutY="525.00" mnemonicParsing="false" onAction="#goWithdraw" text="Sacar" />
             </children>
         </Pane>
     </children>
